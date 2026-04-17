@@ -38,8 +38,10 @@ const App = () => {
 
   return (
     <div className='text-orange-500 w-[90%] md:max-w-165 bg-gray-800 rounded-lg mx-auto my-10 py-4 px-6'>
-      <input type="text" value={passwordField} className='py-2 px-4 bg-gray-200 outline-none w-[78%] md:w-[88%] rounded-bl rounded-ss' placeholder='Password' readOnly ref={passwordRef}/>
-      <button className='text-white bg-black py-2 px-4 rounded-br rounded-se cursor-pointer' onClick={copyPasswordToClipboard}>Copy</button>
+      <div className='flex flex-col md:flex-row gap-3 md:gap-0'>
+          <input type="text" value={passwordField} className='py-2 px-4 bg-gray-200 outline-none w-full md:w-[88%] rounded md:rounded-bl md:rounded-ss' placeholder='Password' readOnly ref={passwordRef}/>
+          <button className='text-white bg-black py-2 px-4 hover:scale-95 rounded md:rounded-br md:rounded-se cursor-pointer w-full md:w-auto' onClick={copyPasswordToClipboard}>Copy</button>
+      </div>
       <div className='flex flex-col md:flex-row mt-3 gap-2'>
         <input type="range" className='cursor-pointer' min={6} max={20} value={length} onChange={(e) => {setLength(e.target.value)}}/>
         <label>Length: ({length})</label>
