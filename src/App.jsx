@@ -38,21 +38,32 @@ const App = () => {
 
   return (
     <div className='text-orange-500 w-[90%] md:max-w-165 bg-gray-800 rounded-lg mx-auto my-10 py-4 px-6'>
-      <div className='flex flex-col md:flex-row gap-3 md:gap-0'>
-          <input type="text" value={passwordField} className='py-2 px-4 bg-gray-200 outline-none w-full md:w-[88%] rounded md:rounded-bl md:rounded-ss' placeholder='Password' readOnly ref={passwordRef}/>
-          <button className='text-white bg-black py-2 px-4 hover:scale-95 rounded md:rounded-br md:rounded-se cursor-pointer w-full md:w-auto' onClick={copyPasswordToClipboard}>Copy</button>
+
+      <div className='flex flex-col gap-3'>
+          <input type="text" value={passwordField} className='py-2 px-4 bg-gray-200 outline-none w-full rounded' placeholder='Password' readOnly ref={passwordRef}/>
+          <div className='flex gap-x-2'>
+            <button className='text-white bg-black py-2 px-4 active:scale-95 rounded cursor-pointer w-[50%] font-semibold' onClick={copyPasswordToClipboard}>Copy</button>
+            <button className='bg-blue-400 text-black py-2 px-4 w-[50%] rounded cursor-pointer active:scale-95 font-semibold' onClick={passwordGenerator}>Re Generate</button>
+          </div>
       </div>
+
       <div className='flex flex-col md:flex-row mt-3 gap-2'>
+
         <input type="range" className='cursor-pointer' min={6} max={20} value={length} onChange={(e) => {setLength(e.target.value)}}/>
         <label>Length: ({length})</label>
+
         <div className='flex gap-x-2'>
+
           <input type="checkbox" id='number' defaultChecked={numberAllowed} onChange={() => {setNumberAllowed((prev) => !prev)}} />
           <label htmlFor="number">Numbers</label>
 
           <input type="checkbox" id='character' defaultChecked={charAllowed} onChange={() => {setCharAllowed((prev) => !prev)}} />
           <label htmlFor="character">Characters</label>
+
         </div>
+
       </div>
+
     </div>
   )
 }
