@@ -6,6 +6,7 @@ const App = () => {
   const [numberAllowed, setNumberAllowed] = useState(false)
   const [charAllowed, setCharAllowed] = useState(false)
   const [passwordField, setPasswordField] = useState("")
+  const [copied, setCopied] = useState(false)
 
   let passwordRef = useRef(null)
 
@@ -30,6 +31,12 @@ const App = () => {
   const copyPasswordToClipboard = useCallback(() => {
     window.navigator.clipboard.writeText(passwordField)
     passwordRef.current?.select()
+    setCopied(true)
+
+    setTimeout(() => {
+      setCopied(false)
+    }, 2000);
+
   }, [passwordField])
 
   useEffect(() => {
@@ -42,8 +49,8 @@ const App = () => {
       <div className='flex flex-col gap-3'>
           <input type="text" value={passwordField} className='py-2 px-4 bg-gray-200 outline-none w-full rounded' placeholder='Password' readOnly ref={passwordRef}/>
           <div className='flex gap-x-2'>
-            <button className='text-white bg-black py-2 px-4 active:scale-95 rounded cursor-pointer w-[50%] font-semibold' onClick={copyPasswordToClipboard}>Copy</button>
-            <button className='bg-blue-400 text-black py-2 px-4 w-[50%] rounded cursor-pointer active:scale-95 font-semibold' onClick={passwordGenerator}>Re Generate</button>
+            <button className='text-white bg-black py-2 px-4 active:scale-95 rounded cursor-pointer w-full md:w-[50%] font-semibold' onClick={copyPasswordToClipboard}>{copied? "Copied!" : "Copy"}</button>
+            <button className='bg-blue-400 text-black py-2 px-4 w-full md:w-[50%] rounded cursor-pointer active:scale-95 font-semibold' onClick={passwordGenerator}>Re Generate</button>
           </div>
       </div>
 
@@ -54,10 +61,10 @@ const App = () => {
 
         <div className='flex gap-x-2'>
 
-          <input type="checkbox" id='number' defaultChecked={numberAllowed} onChange={() => {setNumberAllowed((prev) => !prev)}} />
+          <input type="checkbox" id='number' checked={numberAllowed} onChange={() => {setNumberAllowed((prev) => !prev)}} />
           <label htmlFor="number">Numbers</label>
 
-          <input type="checkbox" id='character' defaultChecked={charAllowed} onChange={() => {setCharAllowed((prev) => !prev)}} />
+          <input type="checkbox" id='character' checked={charAllowed} onChange={() => {setCharAllowed((prev) => !prev)}} />
           <label htmlFor="character">Characters</label>
 
         </div>
